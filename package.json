@@ -1,0 +1,47 @@
+{
+	"name": "@rbxts/flamework-gateways-mod",
+	"version": "1.0.0",
+	"description": "",
+	"main": "out/init.lua",
+	"scripts": {
+		"build": "npx rbxtsc",
+		"watch": "npx rbxtsc -w",
+		"prepublishOnly": "npm run build",
+		"build:test": "npx rbxtsc --type=game -p ./test -i ./include",
+		"watch:test": "npx rbxtsc -w --type=game -p ./test -i ./include",
+		"serve:test": "rojo serve ./test/default.project.json"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"types": "out/index.d.ts",
+	"files": [
+		"out"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"devDependencies": {
+		"@rbxts/compiler-types": "^1.2.7-types.1",
+		"@rbxts/types": "^1.0.557",
+		"@typescript-eslint/eslint-plugin": "^5.6.0",
+		"@typescript-eslint/parser": "^5.6.0",
+		"eslint": "^8.3.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-jsdoc": "^37.0.3",
+		"eslint-plugin-prettier": "^4.0.0",
+		"eslint-plugin-roblox-ts": "0.0.32",
+		"eslint-plugin-simple-import-sort": "^7.0.0",
+		"eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
+		"eslint-plugin-unused-imports": "^1.1.5",
+		"prettier": "^2.5.1",
+		"rbxts-transformer-flamework": "^1.0.0-beta.modding.0",
+		"roblox-ts": "^1.2.7",
+		"typescript": "^4.4.4"
+	},
+	"dependencies": {
+		"@flamework/core": "^1.0.0-beta.modding.1",
+		"@rbxts/make": "^1.0.6",
+		"@rbxts/services": "^1.2.0"
+	}
+}

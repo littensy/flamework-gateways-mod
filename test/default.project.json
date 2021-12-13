@@ -1,0 +1,39 @@
+{
+	"name": "flamework-gateways-mod-test",
+	"tree": {
+		"$className": "DataModel",
+		"ServerScriptService": {
+			"$className": "ServerScriptService",
+			"Server": {
+				"$path": "build/test/server"
+			}
+		},
+		"ReplicatedStorage": {
+			"$className": "ReplicatedStorage",
+			"TS": {
+				"$path": "../include",
+				"node_modules": {
+					"$path": "../node_modules/@rbxts",
+					"flamework-gateways-mod": {
+						"$path": "build/src"
+					},
+					"@flamework": {
+						"$path": "../node_modules/@flamework"
+					}
+				}
+			},
+			"Shared": {
+				"$path": "build/test/shared"
+			}
+		},
+		"StarterPlayer": {
+			"$className": "StarterPlayer",
+			"StarterPlayerScripts": {
+				"$className": "StarterPlayerScripts",
+				"Client": {
+					"$path": "build/test/client"
+				}
+			}
+		}
+	}
+}

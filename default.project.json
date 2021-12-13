@@ -1,0 +1,12 @@
+{
+	"name": "flamework-gateways-mod",
+	"tree": {
+		"$path": "out",
+		"node_modules": {
+			"$path": "node_modules",
+			"@flamework": {
+				"$path": "node_modules/@flamework"
+			}
+		}
+	}
+}

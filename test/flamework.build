@@ -1,0 +1,38 @@
+{
+	"version": 1,
+	"flameworkVersion": "1.0.0-beta.modding.0",
+	"identifiers": {
+		"@rbxts/flamework-gateways-mod:build/src/connection/client-connection@ClientConnection": "@rbxts/flamework-gateways-mod:src/connection/client-connection@ClientConnection",
+		"@rbxts/flamework-gateways-mod:build/src/connection/server-connection@ServerConnection": "@rbxts/flamework-gateways-mod:src/connection/server-connection@ServerConnection",
+		"@rbxts/flamework-gateways-mod:build/test/client/gateways/my.gateway@MyGateway": "@rbxts/flamework-gateways-mod:test/client/gateways/my.gateway@MyGateway",
+		"@rbxts/flamework-gateways-mod:build/src/decorators/gateway.decorator@Gateway": "@rbxts/flamework-gateways-mod:src/decorators/gateway.decorator@Gateway",
+		"@rbxts/flamework-gateways-mod:build/test/server/gateways/test.gateway@TestGateway": "@rbxts/flamework-gateways-mod:test/server/gateways/test.gateway@TestGateway",
+		"@rbxts/flamework-gateways-mod:build/src/decorators/event.decorator@Event": "@rbxts/flamework-gateways-mod:src/decorators/event.decorator@Event",
+		"@rbxts/flamework-gateways-mod:build/src/decorators/request.decorator@Request": "@rbxts/flamework-gateways-mod:src/decorators/request.decorator@Request"
+	},
+	"identifierPrefix": "@rbxts/flamework-gateways-mod",
+	"classes": [
+		{
+			"filePath": "build\\test\\client\\gateways\\my.gateway.lua",
+			"internalId": "@rbxts/flamework-gateways-mod:test/client/gateways/my.gateway@MyGateway",
+			"decorators": [
+				{
+					"internalId": "@rbxts/flamework-gateways-mod:src/decorators/gateway.decorator@Gateway",
+					"isFlameworkDecorator": false,
+					"name": "Gateway"
+				}
+			]
+		},
+		{
+			"filePath": "build\\test\\server\\gateways\\test.gateway.lua",
+			"internalId": "@rbxts/flamework-gateways-mod:test/server/gateways/test.gateway@TestGateway",
+			"decorators": [
+				{
+					"internalId": "@rbxts/flamework-gateways-mod:src/decorators/gateway.decorator@Gateway",
+					"isFlameworkDecorator": false,
+					"name": "Gateway"
+				}
+			]
+		}
+	]
+}

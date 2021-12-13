@@ -1,0 +1,9 @@
+{
+	"version": 1,
+	"flameworkVersion": "1.0.0-beta.8",
+	"identifiers": {
+		"@rbxts/flamework-gateways-mod:out/remote/client-remote@ClientRemote": "@rbxts/flamework-gateways-mod:remote/client-remote@ClientRemote",
+		"@rbxts/flamework-gateways-mod:out/remote/server-remote@ServerRemote": "@rbxts/flamework-gateways-mod:remote/server-remote@ServerRemote"
+	},
+	"identifierPrefix": "@rbxts/flamework-gateways-mod"
+}

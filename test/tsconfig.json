@@ -1,0 +1,39 @@
+{
+	"compilerOptions": {
+		// required
+		"allowSyntheticDefaultImports": true,
+		"downlevelIteration": true,
+		"noLib": true,
+		"strict": true,
+		"module": "CommonJS",
+		"target": "ESNext",
+		"moduleResolution": "Node",
+		"typeRoots": ["../node_modules/@rbxts", "../node_modules/@flamework"],
+		"removeComments": true,
+
+		"rootDirs": [
+			"server",
+			"client",
+			"shared",
+			"../src",
+		],
+
+		"outDir": "build",
+		"baseUrl": ".",
+
+		"paths": {
+			"@rbxts/flamework-gateways-mod": ["../src"],
+			"@rbxts/flamework-gateways-mod/*": ["../src/*"]
+		},
+		"jsx": "react",
+		"jsxFactory": "Roact.createElement",
+		"plugins": [
+			{ "transform": "rbxts-transformer-flamework" }
+		],
+		"experimentalDecorators": true
+	},
+	"include": [
+		"**/*",
+		"../src/**/*"
+	]
+}
