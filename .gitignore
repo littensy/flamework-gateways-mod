@@ -1,4 +1,6 @@
 /node_modules
 /out
 /include
+/test/build
+/flamework.build
 *.tsbuildinfo
