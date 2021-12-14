@@ -1,4 +1,4 @@
-import { ClientGateway, Event, Gateway } from "@rbxts/flamework-gateways-mod";
+import { Gateway, OnEvent } from "@rbxts/flamework-gateways-mod";
 import { Players } from "@rbxts/services";
 
 const localPlayer = Players.LocalPlayer as Player & {
@@ -7,13 +7,9 @@ const localPlayer = Players.LocalPlayer as Player & {
 	};
 };
 
-export interface MyGateway extends ClientGateway {
-	performJump(height: number): Promise<void>;
-}
-
 @Gateway()
 export class MyGateway {
-	@Event()
+	@OnEvent()
 	async performJump(height: number) {
 		print(`Performing jump at height ${height}`);
 		const defaultHeight = localPlayer.Character.Humanoid.JumpHeight;

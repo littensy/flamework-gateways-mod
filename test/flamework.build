@@ -2,13 +2,22 @@
 	"version": 1,
 	"flameworkVersion": "1.0.0-beta.modding.0",
 	"identifiers": {
-		"@rbxts/flamework-gateways-mod:build/src/connection/client-connection@ClientConnection": "@rbxts/flamework-gateways-mod:src/connection/client-connection@ClientConnection",
-		"@rbxts/flamework-gateways-mod:build/src/connection/server-connection@ServerConnection": "@rbxts/flamework-gateways-mod:src/connection/server-connection@ServerConnection",
+		"@rbxts/flamework-gateways-mod:build/src/create-client/client-remote@ClientRemote": "@rbxts/flamework-gateways-mod:src/create-client/client-remote@ClientRemote",
+		"@rbxts/flamework-gateways-mod:build/src/create-client/client@Client": "@rbxts/flamework-gateways-mod:src/create-client/client@Client",
+		"@rbxts/flamework-gateways-mod:build/src/create-server/server-remote@ServerRemote": "@rbxts/flamework-gateways-mod:src/create-server/server-remote@ServerRemote",
+		"@rbxts/flamework-gateways-mod:build/src/create-server/server@Server": "@rbxts/flamework-gateways-mod:src/create-server/server@Server",
+		"@rbxts/flamework-gateways-mod:build/src/helpers/execution-context-host@ExecutionContextHost": "@rbxts/flamework-gateways-mod:src/helpers/execution-context-host@ExecutionContextHost",
+		"@rbxts/flamework-gateways-mod:build/src/helpers/guards-consumer@GuardsConsumer": "@rbxts/flamework-gateways-mod:src/helpers/guards-consumer@GuardsConsumer",
+		"@rbxts/flamework-gateways-mod:build/src/helpers/pipes-consumer@PipesConsumer": "@rbxts/flamework-gateways-mod:src/helpers/pipes-consumer@PipesConsumer",
+		"@rbxts/flamework-gateways-mod:build/src/helpers/remote-handler@RemoteHandler": "@rbxts/flamework-gateways-mod:src/helpers/remote-handler@RemoteHandler",
 		"@rbxts/flamework-gateways-mod:build/test/client/gateways/my.gateway@MyGateway": "@rbxts/flamework-gateways-mod:test/client/gateways/my.gateway@MyGateway",
 		"@rbxts/flamework-gateways-mod:build/src/decorators/gateway.decorator@Gateway": "@rbxts/flamework-gateways-mod:src/decorators/gateway.decorator@Gateway",
+		"@rbxts/flamework-gateways-mod:build/test/server/guards/admin.guard@AdminGuard": "@rbxts/flamework-gateways-mod:test/server/guards/admin.guard@AdminGuard",
+		"@rbxts/flamework-gateways-mod:build/test/server/pipes/uppercase.pipe@UppercasePipe": "@rbxts/flamework-gateways-mod:test/server/pipes/uppercase.pipe@UppercasePipe",
 		"@rbxts/flamework-gateways-mod:build/test/server/gateways/test.gateway@TestGateway": "@rbxts/flamework-gateways-mod:test/server/gateways/test.gateway@TestGateway",
-		"@rbxts/flamework-gateways-mod:build/src/decorators/event.decorator@Event": "@rbxts/flamework-gateways-mod:src/decorators/event.decorator@Event",
-		"@rbxts/flamework-gateways-mod:build/src/decorators/request.decorator@Request": "@rbxts/flamework-gateways-mod:src/decorators/request.decorator@Request"
+		"@rbxts/flamework-gateways-mod:build/src/decorators/on-event.decorator@OnEvent": "@rbxts/flamework-gateways-mod:src/decorators/on-event.decorator@OnEvent",
+		"@rbxts/flamework-gateways-mod:build/src/decorators/use-pipes.decorator@UsePipes": "@rbxts/flamework-gateways-mod:src/decorators/use-pipes.decorator@UsePipes",
+		"@rbxts/flamework-gateways-mod:build/src/decorators/on-invoke.decorator@OnInvoke": "@rbxts/flamework-gateways-mod:src/decorators/on-invoke.decorator@OnInvoke"
 	},
 	"identifierPrefix": "@rbxts/flamework-gateways-mod",
 	"classes": [

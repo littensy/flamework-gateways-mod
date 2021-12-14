@@ -1,16 +1,19 @@
-import { Event, Gateway, Request, ServerGateway } from "@rbxts/flamework-gateways-mod";
+import { Gateway, OnEvent, OnInvoke, UsePipes } from "@rbxts/flamework-gateways-mod";
+import { AdminGuard } from "server/guards/admin.guard";
+import { UppercasePipe } from "server/pipes/uppercase.pipe";
 
-export interface TestGateway extends ServerGateway {}
-
-@Gateway()
+@Gateway({
+	guards: [new AdminGuard(["littensy"])],
+})
 export class TestGateway {
-	@Event()
+	@OnEvent()
+	@UsePipes([undefined, UppercasePipe])
 	async onTest(player: Player, value: string) {
 		print(`${player.Name} said ${value}`);
 	}
 
-	@Request()
-	async getMeaningOfLife(player: Player) {
+	@OnInvoke()
+	async getMeaningOfLife(player: Player, _test: string) {
 		print(`${player.Name} asked for the meaning of life`);
 		return 42;
 	}
