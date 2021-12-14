@@ -8,14 +8,15 @@ import { isArray } from "../utils/array.utils";
 import { resolveCtor } from "../utils/constructor.utils";
 
 /**
- * Decorator that binds pipes to the scope of a specific method. Will be run
- * before guards.
+ * Decorator that binds pipes to the parameters of a method. For example,
+ * `@UsePipes(undefined, PipeB)` binds PipeB to the second parameter.
  *
- * @param pipes Maps a list of pipe instances or classes to individual parameters.
+ * @param pipes A list of pipe instances or classes to apply to their respective
+ * parameters.
  */
 export const UsePipes = Modding.createDecorator<
-	[((PipeTransform | PipeTransform[]) | Constructor<PipeTransform> | Constructor<PipeTransform>[] | undefined)[]]
->("Method", (descriptor, [value]) => {
+	(PipeTransform | Constructor<PipeTransform> | (PipeTransform | Constructor<PipeTransform>)[] | undefined)[]
+>("Method", (descriptor, value) => {
 	const id = `${PIPES_METADATA}.${descriptor.property}`;
 	const pipeMetadata = [...(Reflect.getMetadata<(PipeTransform[] | undefined)[]>(descriptor.object, id) || [])];
 

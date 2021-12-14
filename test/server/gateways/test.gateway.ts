@@ -7,7 +7,7 @@ import { UppercasePipe } from "server/pipes/uppercase.pipe";
 })
 export class TestGateway {
 	@OnEvent()
-	@UsePipes([undefined, UppercasePipe])
+	@UsePipes([], UppercasePipe)
 	async onTest(player: Player, value: string) {
 		print(`${player.Name} said ${value}`);
 	}

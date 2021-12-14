@@ -7,8 +7,8 @@ import { resolveCtor } from "../utils/constructor.utils";
 
 /**
  * Decorator that binds guards to the scope of a specific method. Will be run
- * after pipes. Guards can also be set up for the class using the `@Gateway()`
- * decorator.
+ * after pipes. Guards can also be set up for every method in a class using the
+ * `@Gateway()` decorator.
  *
  * @param guards A list of guard instances or classes.
  */
