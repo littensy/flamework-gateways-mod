@@ -1,7 +1,7 @@
 {
 	"name": "@rbxts/flamework-gateways-mod",
 	"version": "1.0.0",
-	"description": "",
+	"description": "A class-based Flamework networking mod",
 	"main": "out/init.lua",
 	"scripts": {
 		"build": "npx rbxtsc",
@@ -11,9 +11,21 @@
 		"watch:test": "npx rbxtsc -w --type=game -p ./test -i ./include",
 		"serve:test": "rojo serve ./test/default.project.json"
 	},
-	"keywords": [],
-	"author": "",
+	"keywords": [
+		"flamework",
+		"roblox-ts",
+		"networking"
+	],
+	"author": "littensy",
 	"license": "ISC",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/littensy/flamework-gateways-mod.git"
+	},
+	"bugs": {
+		"url": "https://github.com/littensy/flamework-gateways-mod/issues"
+	},
+	"homepage": "https://github.com/littensy/flamework-gateways-mod#readme",
 	"types": "out/index.d.ts",
 	"files": [
 		"out"
