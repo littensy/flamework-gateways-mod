@@ -27,7 +27,7 @@ export interface ConnectionServerImpl<S extends Gateway, C extends Gateway> {
 	readonly _remote: BindRemote;
 
 	/**
-	 * Subscribes to incoming emissions.
+	 * Subscribes to incoming emissions. Guards and pipes **will not** be applied!
 	 * @param event The event to subscribe to.
 	 * @param listener The listener to call when the event is emitted.
 	 * @returns RBXScriptConnection
@@ -39,7 +39,8 @@ export interface ConnectionServerImpl<S extends Gateway, C extends Gateway> {
 	): RBXScriptConnection;
 
 	/**
-	 * Returns a Promise that resolves with the parameters of the next incoming emission.
+	 * Returns a Promise that resolves with the parameters of the next incoming
+	 * emission. Guards and pipes **will not** be applied!
 	 * @param eventName The name of the event to listen for.
 	 * @returns A Promise that resolves with the parameters of the next incoming emission.
 	 * @throws If the event is not defined on the incoming gateway.
