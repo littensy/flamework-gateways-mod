@@ -27,8 +27,8 @@ export const Gateway = Modding.createDecorator<[options?: GatewayOptions]>("Clas
 	]);
 	// Mark as controller or service for DI (hacky)
 	if (RunService.IsServer()) {
-		Reflect.defineMetadata(descriptor.object, Flamework.id<typeof Service>(), {});
+		Reflect.decorate(descriptor.object, Flamework.id<typeof Service>(), { func: Service as never }, []);
 	} else {
-		Reflect.defineMetadata(descriptor.object, Flamework.id<typeof Controller>(), {});
+		Reflect.decorate(descriptor.object, Flamework.id<typeof Controller>(), { func: Controller as never }, []);
 	}
 });
