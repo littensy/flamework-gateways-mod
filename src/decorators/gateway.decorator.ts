@@ -1,4 +1,5 @@
-import { Modding, Reflect } from "@flamework/core";
+import { Controller, Flamework, Modding, Reflect, Service } from "@flamework/core";
+import { RunService } from "@rbxts/services";
 
 import { GUARDS_METADATA } from "../constants";
 import { Constructor } from "../interfaces/constructor.interface";
@@ -24,4 +25,10 @@ export const Gateway = Modding.createDecorator<[options?: GatewayOptions]>("Clas
 		...(Reflect.getMetadata<CanActivate[]>(descriptor.object, `${GUARDS_METADATA}`) || []),
 		...(options?.guards?.map(ctor => resolveCtor(ctor)) || []),
 	]);
+	// Mark as controller or service for DI (hacky)
+	if (RunService.IsServer()) {
+		Reflect.defineMetadata(descriptor.object, Flamework.id<typeof Service>(), {});
+	} else {
+		Reflect.defineMetadata(descriptor.object, Flamework.id<typeof Controller>(), {});
+	}
 });
