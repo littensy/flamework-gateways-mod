@@ -1,6 +1,6 @@
 {
 	"name": "@rbxts/flamework-gateways-mod",
-	"version": "1.0.0",
+	"version": "0.0.1",
 	"description": "A class-based Flamework networking mod",
 	"main": "out/init.lua",
 	"scripts": {
