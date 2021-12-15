@@ -12,7 +12,7 @@ export function getClient<S extends Gateway = {}, C extends Gateway = {}>(): Con
 	return connection as ConnectionClient<S, C>;
 }
 
-export async function createClient<S extends Gateway, C extends Gateway>(): Promise<ConnectionClient<S, C>> {
+export function createClient<S extends Gateway, C extends Gateway>(): ConnectionClient<S, C> {
 	if (connection) {
 		return connection as ConnectionClient<S, C>;
 	}

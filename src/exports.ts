@@ -5,9 +5,10 @@ import { Gateway } from "./interfaces/gateway";
 
 /**
  * Gets or initializes a client connection. Should be called before igniting Flamework.
+ * @yields
  * @returns Connection client instance
  */
-export function connectClient<S extends Gateway, C extends Gateway>(): Promise<ConnectionClient<S, C>> {
+export function connectClient<S extends Gateway, C extends Gateway>(): ConnectionClient<S, C> {
 	return createClient<S, C>();
 }
 

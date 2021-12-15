@@ -5,7 +5,7 @@ import { MyGateway } from "./gateways/my.gateway";
 import { TestGateway } from "./gateways/test.gateway";
 
 async function bootstrap() {
-	const client = await connectClient<TestGateway, MyGateway>();
+	const client = connectClient<TestGateway, MyGateway>();
 
 	Flamework.addPaths("./gateways");
 	Flamework.ignite();
