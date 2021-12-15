@@ -1,9 +1,9 @@
 <h1 align="center">
-	<code>🌉flamework-gateways-mod🌉</code>
-	<br>
+  <code>🌉flamework-gateways-mod🌉</code>
+  <br>
 </hi>
 
-<h4 align="center">A Flamework networking mod designed to the same thing but worse</h4>
+<h4 align="center">A Flamework networking mod</h4>
 
 ## ✨ Featuring
 
@@ -11,15 +11,16 @@
 
 🛡️ Guards - Block certain requests before they are processed
 
-🤣 Pipes - Transform and validate parameters passed to requests
-
-💐 Decorators - I want decorators
+📞 Pipes - Transform and validate parameters passed to requests
 
 ## 🌻 Motivation
 
-I prefer my packages unfinished and unstable. But when I ran `npm install @flamework/networking` and saw high-quality code, I absolutely knew that things had to change.
+This is mainly a personal project to handle remotes with classes and decorators.
 
-`flamework-gateways-mod` makes sure to provide only the dumbest learning curves. It is designed to look like, but fall short of, objectively better solutions.
+## ⚠️ Limitations
+
+❌ Client-side RemoteFunctions are not supported
+ - It is difficult for the server to safely determine whether a client remote is a function or an event.
 
 ## 🔌 Installation
 
@@ -34,26 +35,49 @@ npm install @rbxts/flamework-gateways-mod
 
 ## 📚 Examples
 
+### 🗂️ Client-server connection
+
+`connectServer` and `connectClient` should be called before igniting Flamework.
+
+```ts
+const server = connectServer<ServerGateway, ClientGateway>();
+server.emit("clientEvent", players, ...args);
+server.broadcast("clientEvent", ...args);
+```
+
+```ts
+const client = connectClient<ServerGateway, ClientGateway>();
+client.emit("serverEvent", ...args);
+await client.request("serverInvoke", ...args);
+```
+
 ### 🌉 Gateway
+
+Gateways should be added to `Flamework.addPaths()`.
+
 ```ts
 @Gateway({
   guards: [new AdminGuard(["littensy"])],
 })
-class MyGateway {
+class AdminGateway {
+  constructor(private readonly adminService: AdminService) {}
+
   @OnEvent()
-  @UsePipes([], UppercasePipe)
-  async onSend(player: Player, value: string) {
-    print(`${player.Name} said ${value}`);
+  @UsePipes([], CommandPipe)
+  async processCommand(player: Player, message: string): Promise<void>;
+  async processCommand(player: Player, tokens: string | Array<string>) {
+    this.adminService.runCommand(player, tokens as Array<string>);
   }
 
   @OnInvoke()
-  async getMeaningOfLife(player: Player, _test: string) {
-    return 42;
+  async getCommands() {
+    return this.adminService.getCommands();
   }
 }
 ```
 
 ### 🛡️ Guard
+
 ```ts
 class AdminGuard implements CanActivate {
   constructor(private readonly admins: Array<string>) {}
@@ -64,17 +88,13 @@ class AdminGuard implements CanActivate {
 }
 ```
 
+### 📞 Pipe
 
-### 🤣 Pipe
 ```ts
-class UppercasePipe implements PipeTransform {
+class CommandPipe implements PipeTransform {
   transform(value: unknown) {
-    assert(typeIs(value, "string"), "(UppercasePipe) Value must be a string");
-    return value.upper();
+    assert(typeIs(value, "string"), "(CommandPipe) Value must be a string");
+    return value.split(" ");
   }
 }
 ```
-
-## Limitations
-
-`flamework-gateways-mod` may spontaneously stop working, or fail to begin with. This note will be removed when it's stable
