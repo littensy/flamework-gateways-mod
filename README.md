@@ -51,7 +51,7 @@ type ClientGateway = OneGateway & AnotherGateway;
 const client = connectClient<ServerGateway, ClientGateway>();
 
 client.emit("serverEvent", ...args);
-client.request("serverInvoke", ...args);
+client.request("serverInvoke", ...args).catch(...);
 ```
 
 ### 🌉 Gateway
