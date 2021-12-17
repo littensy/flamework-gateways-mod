@@ -17,11 +17,6 @@
 
 This is mainly a personal project to handle remotes with classes and decorators.
 
-## ⚠️ Limitations
-
-❌ Client-side RemoteFunctions are not supported
- - It is difficult for the server to safely determine whether a client remote is a function or an event.
-
 ## 🔌 Installation
 
 ```
@@ -39,21 +34,29 @@ npm install @rbxts/flamework-gateways-mod
 
 `connectServer` and `connectClient` should be called before igniting Flamework.
 
+Do note that guards & pipes will not be applied to external listeners like `.on`, `.wait`, etc.!
+
 ```ts
+type ServerGateway = OneGateway & AnotherGateway;
+
 const server = connectServer<ServerGateway, ClientGateway>();
+
 server.emit("clientEvent", players, ...args);
 server.broadcast("clientEvent", ...args);
 ```
 
 ```ts
+type ClientGateway = OneGateway & AnotherGateway;
+
 const client = connectClient<ServerGateway, ClientGateway>();
+
 client.emit("serverEvent", ...args);
-await client.request("serverInvoke", ...args);
+client.request("serverInvoke", ...args);
 ```
 
 ### 🌉 Gateway
 
-Gateways should be added to `Flamework.addPaths()`.
+Gateways should be added to `Flamework.addPaths()`
 
 ```ts
 @Gateway({
@@ -63,10 +66,10 @@ class AdminGateway {
   constructor(private readonly adminService: AdminService) {}
 
   @OnEvent()
+  @UseGuards(CommandDebounceGuard)
   @UsePipes([], CommandPipe)
-  async processCommand(player: Player, message: string): Promise<void>;
-  async processCommand(player: Player, tokens: string | Array<string>) {
-    this.adminService.runCommand(player, tokens as Array<string>);
+  async processCommand(player: Player, message: string | Array<string>) {
+    this.adminService.runCommand(player, message as Array<string>);
   }
 
   @OnInvoke()
@@ -78,17 +81,35 @@ class AdminGateway {
 
 ### 🛡️ Guard
 
+Creatable guards
+
 ```ts
 class AdminGuard implements CanActivate {
   constructor(private readonly admins: Array<string>) {}
 
-  canActivate(context: ExecutionContext) 
+  canActivate(context: ExecutionContext) {
     return this.admins.includes(context.getPlayer().Name);
   }
 }
 ```
 
+Singleton guards should be added to `Flamework.addPaths()`
+
+```ts
+@Guard()
+class CommandDebounceGuard implements CanActivate {
+  constructor(private readonly roduxService: RoduxService) {}
+
+  canActivate(context: ExecutionContext) {
+    const state = this.roduxService.getState();
+    return time() >= state.commandDebounce;
+  }
+}
+```
+
 ### 📞 Pipe
+
+Creatable pipe
 
 ```ts
 class CommandPipe implements PipeTransform {
@@ -98,3 +119,13 @@ class CommandPipe implements PipeTransform {
   }
 }
 ```
+
+Singleton pipes should be added to `Flamework.addPaths()`
+
+## ⚠️ Limitations
+
+❌ Client-side RemoteFunctions are not supported
+ - It is difficult to safely determine whether a client remote is a function or an event from the server.
+
+❌ Some type limitations
+ - Pipe transformation input/output is not type checked, use `Input | Output` in the parameter type to keep track (see examples).
