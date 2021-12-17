@@ -5,24 +5,7 @@ import { Gateway, GatewayEvents } from "../gateway";
 /**
  * Bridge client and server gateways.
  */
-export type ConnectionServer<S extends Gateway = {}, C extends Gateway = {}> = ConnectionServerImpl<S, C> &
-	Sender<C> &
-	Receiver<S>;
-
-type Sender<C extends Gateway> = {
-	[K in keyof GatewayEvents<C>]: (
-		players: Player | Player[],
-		...args: FunctionParameters<GatewayEvents<C>[K]>
-	) => void;
-};
-
-type Receiver<S extends Gateway> = {
-	[K in keyof GatewayEvents<S>]: (
-		listener: (...args: FunctionParameters<GatewayEvents<S>[K]>) => void,
-	) => RBXScriptConnection;
-};
-
-export interface ConnectionServerImpl<S extends Gateway, C extends Gateway> {
+export interface ConnectionServer<S extends Gateway = {}, C extends Gateway = {}> {
 	/** @hidden */
 	readonly _remote: BindRemote;
 

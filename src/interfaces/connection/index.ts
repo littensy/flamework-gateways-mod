@@ -1,2 +1,2 @@
-export { ConnectionClient, ConnectionClientImpl } from "./connection-client.interface";
-export { ConnectionServer, ConnectionServerImpl } from "./connection-server.interface";
+export { ConnectionClient } from "./connection-client.interface";
+export { ConnectionServer } from "./connection-server.interface";

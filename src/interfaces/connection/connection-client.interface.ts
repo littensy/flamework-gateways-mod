@@ -1,29 +1,11 @@
 import { BindRemote } from "../bind-remote.interface";
-import { FunctionParameters, FunctionReturn, UnwrapFunctionReturn } from "../function.type";
+import { FunctionParameters, UnwrapFunctionReturn } from "../function.type";
 import { Gateway, GatewayEvents, GatewayRequests, OmitPlayerParameter } from "../gateway";
 
 /**
  * Bridge server and client gateways.
  */
-export type ConnectionClient<S extends Gateway = {}, C extends Gateway = {}> = ConnectionClientImpl<S, C> &
-	Sender<S> &
-	Receiver<C>;
-
-type Sender<S extends Gateway> = {
-	[K in keyof GatewayEvents<S>]: (...args: FunctionParameters<OmitPlayerParameter<GatewayEvents<S>[K]>>) => void;
-} & {
-	[K in keyof GatewayRequests<S>]: (
-		...args: FunctionParameters<OmitPlayerParameter<GatewayRequests<S>[K]>>
-	) => FunctionReturn<GatewayRequests<S>[K]>;
-};
-
-type Receiver<C extends Gateway> = {
-	[K in keyof GatewayEvents<C>]: (
-		listener: (...args: FunctionParameters<GatewayEvents<C>[K]>) => void,
-	) => RBXScriptConnection;
-};
-
-export interface ConnectionClientImpl<S extends Gateway, C extends Gateway> {
+export interface ConnectionClient<S extends Gateway = {}, C extends Gateway = {}> {
 	/** @hidden */
 	readonly _remote: BindRemote;
 

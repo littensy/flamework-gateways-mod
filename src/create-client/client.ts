@@ -1,9 +1,9 @@
-import { ConnectionClientImpl } from "../interfaces/connection";
+import { ConnectionClient } from "../interfaces/connection";
 import { FunctionParameters, UnwrapFunctionReturn } from "../interfaces/function.type";
 import { Gateway, GatewayEvents, GatewayRequests, OmitPlayerParameter } from "../interfaces/gateway";
 import { ClientRemote } from "./client-remote";
 
-export class Client<S extends Gateway = {}, C extends Gateway = {}> implements ConnectionClientImpl<S, C> {
+export class Client<S extends Gateway, C extends Gateway> implements ConnectionClient<S, C> {
 	/** @hidden */
 	readonly _remote = new ClientRemote();
 

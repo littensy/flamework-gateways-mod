@@ -1,9 +1,9 @@
-import { ConnectionServerImpl } from "../interfaces/connection";
+import { ConnectionServer } from "../interfaces/connection";
 import { FunctionParameters } from "../interfaces/function.type";
 import { Gateway, GatewayEvents } from "../interfaces/gateway";
 import { ServerRemote } from "./server-remote";
 
-export class Server<S extends Gateway = {}, C extends Gateway = {}> implements ConnectionServerImpl<S, C> {
+export class Server<S extends Gateway, C extends Gateway> implements ConnectionServer<S, C> {
 	/** @hidden */
 	readonly _remote = new ServerRemote();
 
