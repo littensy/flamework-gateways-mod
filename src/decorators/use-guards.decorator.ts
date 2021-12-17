@@ -3,7 +3,9 @@ import { Modding, Reflect } from "@flamework/core";
 import { GUARDS_METADATA } from "../constants";
 import { Constructor } from "../interfaces/constructor.interface";
 import { CanActivate } from "../interfaces/features/can-activate.interface";
-import { resolveCtor } from "../utils/constructor.utils";
+import { createGuardResolvers } from "./utils/create-guard-resolvers.util";
+
+export type Guard = CanActivate | Constructor<CanActivate>;
 
 /**
  * Decorator that binds guards to the scope of a specific method. Will be run
@@ -12,13 +14,10 @@ import { resolveCtor } from "../utils/constructor.utils";
  *
  * @param guards A list of guard instances or classes.
  */
-export const UseGuards = Modding.createDecorator<(CanActivate | Constructor<CanActivate>)[]>(
-	"Method",
-	(descriptor, guards) => {
-		const id = `${GUARDS_METADATA}.${descriptor.property}`;
-		Reflect.defineMetadata(descriptor.object, id, [
-			...(Reflect.getMetadata<CanActivate[]>(descriptor.object, id) || []),
-			...guards.map(ctor => resolveCtor(ctor)),
-		]);
-	},
-);
+export const UseGuards = Modding.createDecorator<Guard[]>("Method", (descriptor, guards) => {
+	Reflect.defineMetadata(
+		descriptor.object,
+		`${GUARDS_METADATA}.${descriptor.property}`,
+		createGuardResolvers(descriptor.object, guards, descriptor.property),
+	);
+});

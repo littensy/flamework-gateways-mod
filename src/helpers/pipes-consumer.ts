@@ -14,9 +14,9 @@ export class PipesConsumer {
 			if (!transform) {
 				continue;
 			}
-			args[index - 1] = await transform.reduce(async (deferredValue, pipe) => {
+			args[index - 1] = await transform.reduce(async (deferredValue, resolve) => {
 				const val = await deferredValue;
-				const result = pipe.transform(val, context);
+				const result = resolve().transform(val, context);
 				return result;
 			}, Promise.resolve(value));
 		}

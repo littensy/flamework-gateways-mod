@@ -11,8 +11,8 @@ export class GuardsConsumer {
 			return true;
 		}
 
-		for (const guard of guards) {
-			const result = guard.canActivate(context);
+		for (const resolve of guards) {
+			const result = resolve().canActivate(context);
 			if (await result) {
 				continue;
 			}
