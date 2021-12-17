@@ -19,6 +19,10 @@ This is mainly a personal project to handle remotes with classes and decorators.
 
 ## 🔌 Installation
 
+```json
+"typeRoots": ["node_modules/@rbxts", "node_modules/@flamework"],
+```
+
 ```
 npm install @flamework/core@modding
 npm install -D rbxts-transformer-flamework@modding
