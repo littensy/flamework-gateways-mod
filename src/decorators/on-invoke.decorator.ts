@@ -4,6 +4,7 @@ import { RunService } from "@rbxts/services";
 import { IS_ON_INVOKE_METADATA } from "../constants";
 import { getServer } from "../create-server";
 import { RemoteHandler } from "../helpers/remote-handler";
+import { resolveDependency } from "../utils/resolve-dependency.util";
 
 /**
  * Decorator that connects a method to a RemoteFunction instance.
@@ -17,12 +18,21 @@ export const OnInvoke = Modding.createDecorator("Method", descriptor => {
 	const remoteHandler = new RemoteHandler(descriptor);
 
 	remote.bindRequest(descriptor.property, (...initialArgs: unknown[]) => {
+		const instance = resolveDependency(descriptor.object);
+
+		if (!instance) {
+			throw [
+				`Could not resolve dependency for parent class of ${descriptor.property};`,
+				`Was a remote fired before calling Flamework.ignite?`,
+			].join(" ");
+		}
+
 		const promise = new Promise((resolve, reject) => {
 			remoteHandler.process(args => {
 				if (args !== undefined) {
-					resolve(method(descriptor.object, ...args));
+					resolve(method(instance, ...args));
 				} else {
-					reject(`A guard blocked request '${descriptor.property}'; An error will be thrown.`);
+					reject(`A guard blocked '${descriptor.property}' invocation; An error will be thrown.`);
 				}
 			}, ...initialArgs);
 		});
