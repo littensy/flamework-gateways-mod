@@ -7,6 +7,7 @@ export class PipesConsumer {
 	async applyPipes(context: ExecutionContext) {
 		const transforms = getPipesForMethod(context.getDescriptor());
 		const args = context.getArgs();
+
 		for (const [index, value] of Object.entries(args)) {
 			// Object.entries will not be zero-indexed
 			const transform = transforms[index - 1];

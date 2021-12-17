@@ -21,10 +21,7 @@ export const OnInvoke = Modding.createDecorator("Method", descriptor => {
 		const instance = resolveDependency(descriptor.object);
 
 		if (!instance) {
-			throw [
-				`Could not resolve dependency for parent class of ${descriptor.property};`,
-				`Was a remote fired before calling Flamework.ignite?`,
-			].join(" ");
+			throw `Could not get Gateway for @OnInvoke() ${descriptor.property}; Gateways should be ignited by Flamework`;
 		}
 
 		const promise = new Promise((resolve, reject) => {
